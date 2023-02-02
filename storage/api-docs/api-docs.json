@@ -1,0 +1,217 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Prueba de BEX",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/v1/register": {
+            "post": {
+                "tags": [
+                    "Register"
+                ],
+                "summary": "User Register",
+                "description": "User Register here",
+                "operationId": "Register",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "text"
+                                    },
+                                    "email": {
+                                        "type": "text"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/v1/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "User Login",
+                "description": "User Login here",
+                "operationId": "Login",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "text"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "userProfile OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Credenciales inválidas"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/user/me": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Mostrar usuarios",
+                "description": "Se coloca el token en header con el nombre de token.",
+                "operationId": "user",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/update{id}": {
+            "put": {
+                "tags": [
+                    "Update"
+                ],
+                "summary": "User Update",
+                "operationId": "Update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id, eg; 1",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User update"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/remove{id}": {
+            "delete": {
+                "tags": [
+                    "Delete"
+                ],
+                "summary": "User delete",
+                "operationId": "Delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id, eg; 1",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Delete"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/users": {
+            "get": {
+                "tags": [
+                    "User List"
+                ],
+                "summary": "Mostrar usuarios",
+                "operationId": "Users",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    }
+}
